@@ -17,19 +17,4 @@ class Cliente
         Nombre = nombre;
         FechaInscripcion = fechaInscripcion;
     }
-
-
-    public static int Dinero(int TipoEntrada, int cantidad)
-    {
-        int[] precios = {45000, 60000, 30000, 100000}; 
-        int dinerGastado = 0;
-        for (int i = 1; i < 4; i++)
-        {
-            if(TipoEntrada == i)
-            {
-                dinerGastado = precios[i] * cantidad;
-            }
-        }
-        return dinerGastado;
-    }
 }
