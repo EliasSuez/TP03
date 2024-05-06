@@ -21,15 +21,15 @@ class Cliente
 
     public static int Dinero(int TipoEntrada, int cantidad)
     {
-        int dinerGastado;
-        
+        int[] precios = {45000, 60000, 30000, 100000}; 
+        int dinerGastado = 0;
         for (int i = 1; i < 4; i++)
         {
             if(TipoEntrada == i)
             {
-
+                dinerGastado = precios[i] * cantidad;
             }
-
         }
+        return dinerGastado;
     }
 }

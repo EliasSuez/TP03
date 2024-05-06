@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections;
+
 int dni = 0, tipoEntrada = 0, cantidad = 0;
 string apellido = "", nombre = "";
 double fechaInscripcion = 0; 
