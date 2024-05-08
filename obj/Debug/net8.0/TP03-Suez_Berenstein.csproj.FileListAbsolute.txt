@@ -1,0 +1,5 @@
+Z:\4ID\Programacion\TP03-Suez_Berenstein\obj\Debug\net8.0\TP03-Suez_Berenstein.GeneratedMSBuildEditorConfig.editorconfig
+Z:\4ID\Programacion\TP03-Suez_Berenstein\obj\Debug\net8.0\TP03-Suez_Berenstein.AssemblyInfoInputs.cache
+Z:\4ID\Programacion\TP03-Suez_Berenstein\obj\Debug\net8.0\TP03-Suez_Berenstein.AssemblyInfo.cs
+Z:\4ID\Programacion\TP03-Suez_Berenstein\obj\Debug\net8.0\TP03-Suez_Berenstein.csproj.CoreCompileInputs.cache
+Z:\4ID\Programacion\TP03-Suez_Berenstein\obj\Debug\net8.0\TP03-Suez_Berenstein.sourcelink.json

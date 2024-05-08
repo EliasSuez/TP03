@@ -14,6 +14,33 @@ switch (opcion)
     case 1:
 
         break;
+
+    case 2: 
+        break;
+
+    case 3:
+        int IdABuscar;
+        do{
+        Console.WriteLine("Ingrese un ID para mostrar datos del cliente");
+        IdABuscar = int.Parse(Console.ReadLine());
+        }while(IdABuscar < 0);
+        cliente = Ticketera.BuscarCliente(IdABuscar);
+
+        if(cliente == null)
+        {
+            Console.WriteLine("No se encontro un cliente con ese ID");
+        }
+        else
+        {
+            Console.WriteLine(cliente);
+            /*Console.WriteLine("DNI del cliente: " + cliente.DNI);
+            Console.WriteLine("DNI del cliente: " + cliente.Apellido);
+            Console.WriteLine(cliente.Nombre);
+            Console.WriteLine(cliente.FechaInscripcion);
+            Console.WriteLine(cliente.TipoEntrada);
+            Console.WriteLine(cliente.Cantidad);*/
+        }
+    break;
 }
 
 
