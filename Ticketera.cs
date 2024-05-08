@@ -11,15 +11,17 @@ static class Ticketera{
         return numero;
     }
 
-    public static int AgregarCliente(Cliente cliente){
+    public static int AgregarCliente(Cliente cliente)
+    {
         int key = Ticketera.DevolverUltimoID();
-        do{
-        if(DicClientes.ContainsKey())
+        do
         {
-            key = Ticketera.DevolverUltimoID();
-        }
-        while(!DicClientes.ContainsKey(GenericUriParserOptions));
-            
+            if (DicClientes.ContainsKey(key))
+            {
+                key = Ticketera.DevolverUltimoID();
+            }
+        } while (!DicClientes.ContainsKey(key));
+
         DicClientes.Add(key, cliente);
         return key;
     }
