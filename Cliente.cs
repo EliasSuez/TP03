@@ -6,9 +6,9 @@ class Cliente
     public int Cantidad { get; set; }
     public string Apellido { get; private set; }
     public string Nombre { get; private set; }
-    public double FechaInscripcion { get; set; }
+    public DateTime FechaInscripcion { get; set; }
   
-    public Cliente(int dni, int tipoEntrada, int cantidad, string apellido, string nombre, double fechaInscripcion)
+    public Cliente(int dni, int tipoEntrada, int cantidad, string apellido, string nombre, DateTime fechaInscripcion)
     {
         DNI = dni;
         TipoEntrada = tipoEntrada;

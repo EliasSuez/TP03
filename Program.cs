@@ -1,30 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-int dni = 0, tipoEntrada = 0, cantidad = 0, cantClientes = 0, opcion;
-string apellido = "", nombre = "", ingreso;
-double fechaInscripcion = 0;
-List<int> DineroRecaudado = new List<int>();
+int cantClientes = 0, opcion;
+string ingreso;
+Dictionary<Cliente, int> DIClientes = new Dictionary<Cliente, int>();
+Cliente cliente;
 
 Menu();
 Console.WriteLine("Ingrese que opcion del menu quiere");
 opcion = int.Parse(Console.ReadLine());
-switch(opcion)
+switch (opcion)
 {
     case 1:
-    
-    break;
+
+        break;
 }
 
 
-do{
-ValidarDatos(dni, tipoEntrada, cantidad, apellido, nombre, fechaInscripcion);
-Cliente cliente = new Cliente(dni, tipoEntrada, cantidad, apellido, nombre, fechaInscripcion);
-cantClientes++;
-DineroRecaudado.Add(Dinero(tipoEntrada, cantidad));
-Console.WriteLine("Quiere continuar ingresando, SI o NO");
-ingreso = Console.ReadLine().ToUpper();
-}while(ingreso == "NO");
+do
+{
+    cliente = ObtenerCliente();
+    cantClientes++;
+    DIClientes.Add(ObtenerCliente(), Dinero(cliente.TipoEntrada, cliente.Cantidad));
+
+    do
+    {
+        Console.WriteLine("¿Quiere continuar ingresando? Ingrese SI o NO");
+        ingreso = Console.ReadLine().ToUpper();
+    } while (ingreso != "SI" && ingreso != "NO") ;
+} while (ingreso == "NO");
 
 
 
@@ -59,16 +63,13 @@ static int IngresarNumero(string mensaje)
     ingreso = int.Parse(Console.ReadLine());
     return ingreso;
 }
-static double IngresarNumeroD(string mensaje)
+static Cliente ObtenerCliente()
 {
-    double ingreso;
-    Console.WriteLine(mensaje);
-    ingreso = int.Parse(Console.ReadLine());
-    return ingreso;
-}
+    DateTime fechaInscripcion = new DateTime(0, 0, 0);
+    string apellido, nombre;
+    int dni, tipoEntrada, cantidad;
 
-static void ValidarDatos(int dni, int tipoEntrada, int cantidad, string apellido, string nombre, double fechaInscripcion)
-{
+
     do
     {
         dni = IngresarNumero("Ingrese el DNI");
@@ -91,15 +92,19 @@ static void ValidarDatos(int dni, int tipoEntrada, int cantidad, string apellido
     } while (apellido != " ");
     do
     {
-        fechaInscripcion = IngresarNumeroD("Ingrese la cantidad de entradas");
-    } while (cantidad < 0);
+        Console.WriteLine("Ingrese la fecha");
+        fechaInscripcion = DateTime.Parse(Console.ReadLine());
+    } while (fechaInscripcion < DateTime.Now);
+    Cliente cliente = new Cliente(dni, tipoEntrada, cantidad, apellido, nombre, fechaInscripcion);
+
+    return cliente;
 }
 static void Menu()
 {
-Console.WriteLine("Nueva Inscripción");
-Console.WriteLine("Obtener Estadísticas del Evento");
-Console.WriteLine("Buscar Cliente");
-Console.WriteLine("Cambiar entrada de un Cliente");
-Console.WriteLine("Salir");
-Console.WriteLine();
+    Console.WriteLine("i. Nueva Inscripción");
+    Console.WriteLine("ii. Obtener Estadísticas del Evento");
+    Console.WriteLine("iii. Buscar Cliente");
+    Console.WriteLine("iv. Cambiar entrada de un Cliente");
+    Console.WriteLine("v. Salir");
+    Console.WriteLine();
 }
