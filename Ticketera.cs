@@ -16,9 +16,22 @@ static class Ticketera
         return key;
     }
 
-    public static Cliente BuscarCliente(int ID)
+    public static Cliente BuscarCliente()
     {
+        int IdABuscar;
+        do{
+        Console.WriteLine("Ingrese un ID para mostrar datos del cliente");
+        IdABuscar = int.Parse(Console.ReadLine());
+        }while(IdABuscar < 0);
+        if(DicClientes.ContainsKey(IdABuscar))
+        {
 
+        }
+        else 
+        {
+            Console.WriteLine("No se encontró un cliente con ese ID");
+        }
+        
     }
 
     public static int CambiarEntrada(int ID, int Tipo, int Cantidad)
@@ -30,5 +43,4 @@ static class Ticketera
     {
 
     }
-}
 }
