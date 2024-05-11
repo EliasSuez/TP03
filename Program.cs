@@ -1,63 +1,96 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-int cantClientes = 0, opcion;
+int cantClientes = 0, opcion, nuevaEntrada, cantEntradas;
 string ingreso;
 Dictionary<Cliente, int> DIClientes = new Dictionary<Cliente, int>();
-Cliente cliente;
+Cliente cliente, clienteEncontrado;
+
 
 Menu();
 Console.WriteLine("Ingrese que opcion del menu quiere");
 opcion = int.Parse(Console.ReadLine());
-switch (opcion)
-{
-    case 1:
-
-        break;
-
-    case 2: 
-        break;
-
-    case 3:
-        int IdABuscar;
-        do{
-        Console.WriteLine("Ingrese un ID para mostrar datos del cliente");
-        IdABuscar = int.Parse(Console.ReadLine());
-        }while(IdABuscar < 0);
-        cliente = Ticketera.BuscarCliente(IdABuscar);
-
-        if(cliente == null)
-        {
-            Console.WriteLine("No se encontro un cliente con ese ID");
-        }
-        else
-        {
-            Console.WriteLine(cliente);
-            /*Console.WriteLine("DNI del cliente: " + cliente.DNI);
-            Console.WriteLine("DNI del cliente: " + cliente.Apellido);
-            Console.WriteLine(cliente.Nombre);
-            Console.WriteLine(cliente.FechaInscripcion);
-            Console.WriteLine(cliente.TipoEntrada);
-            Console.WriteLine(cliente.Cantidad);*/
-        }
-    break;
-}
-
-
 do
 {
-    cliente = ObtenerCliente();
-    cantClientes++;
-    DIClientes.Add(ObtenerCliente(), Dinero(cliente.TipoEntrada, cliente.Cantidad));
-
-    do
+    switch (opcion)
     {
-        Console.WriteLine("¿Quiere continuar ingresando? Ingrese SI o NO");
-        ingreso = Console.ReadLine().ToUpper();
-    } while (ingreso != "SI" && ingreso != "NO") ;
-} while (ingreso == "NO");
+        case 1:
+            do
+            {
+                cliente = ObtenerCliente();
+                cantClientes++;
+                DIClientes.Add(ObtenerCliente(), Dinero(cliente.TipoEntrada, cliente.Cantidad));
+                do
+                {
+                    Console.WriteLine("¿Quiere continuar ingresando? Ingrese SI o NO");
+                    ingreso = Console.ReadLine().ToUpper();
+                } while (ingreso != "SI" && ingreso != "NO");
+            } while (ingreso == "NO");
+            break;
 
+        case 2:
+            List<string> estadisticas = Ticketera.EstadisticasTicketera();
+            foreach (string estadistica in estadisticas)
+            {
+                Console.WriteLine(estadistica);
+            }
 
+            break;
+
+        case 3:
+            int IdABuscar;
+            do
+            {
+                Console.WriteLine("Ingrese un ID para mostrar datos del cliente");
+                IdABuscar = int.Parse(Console.ReadLine());
+            } while (IdABuscar < 0);
+            cliente = Ticketera.BuscarCliente(IdABuscar);
+
+            if (cliente == null)
+            {
+                Console.WriteLine("No se encontro un cliente con ese ID");
+            }
+            else
+            {
+                Console.WriteLine(cliente);
+            }
+            break;
+
+        case 4:
+            do
+            {
+                do
+                {
+                    IdABuscar = IngresarNumero("Ingrese el id a buscar");
+
+                } while (IdABuscar < 0);
+                do
+                {
+                    nuevaEntrada = IngresarNumero("Ingrese porque tipo de entrada la quiere cambiar, tiene que superar el costo de la anterior entrada");
+                } while (nuevaEntrada < 1 || nuevaEntrada > 4);
+                do
+                {
+                    cantEntradas = IngresarNumero("Ingrese la cantidad de entradas que quiere ahora");
+                } while (cantEntradas < 0);
+                clienteEncontrado = Ticketera.BuscarCliente(IdABuscar);
+                if (clienteEncontrado == null)
+                {
+                    Console.WriteLine("No existe un cliente con ese ID");
+                    clienteEncontrado.Cantidad = 0;
+                }
+            } while (clienteEncontrado.Cantidad * clienteEncontrado.TipoEntrada > cantEntradas * nuevaEntrada);
+
+            bool cambio = Ticketera.CambiarEntrada(IdABuscar, nuevaEntrada, cantEntradas);
+            int nuevMonto = Dinero(nuevaEntrada, cantEntradas);
+            DIClientes[clienteEncontrado] = nuevMonto;
+            if (cambio)
+                Console.WriteLine("Se pudo hacer el cambio");
+            else
+                Console.WriteLine("No se pudo hacer el cambio");
+
+            break;
+    }
+} while (opcion != 5);
 
 
 static int Dinero(int tipoEntrada, int cantidad)
@@ -71,6 +104,7 @@ static int Dinero(int tipoEntrada, int cantidad)
             dinerGastado = precios[i] * cantidad;
         }
     }
+
     return dinerGastado;
 }
 
@@ -135,3 +169,4 @@ static void Menu()
     Console.WriteLine("v. Salir");
     Console.WriteLine();
 }
+
