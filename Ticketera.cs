@@ -52,7 +52,7 @@ static class Ticketera
         IncioArray(recaudacionPorTipo);
         foreach (Cliente cliente in DicClientes.Values)
         {
-            for (int i = 0; i < DicClientes.Count; i++)
+            for (int i = 0; i < (precios.Length-1); i++)
             {
                 if (i == cliente.TipoEntrada)
                 {
