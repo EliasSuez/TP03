@@ -19,11 +19,11 @@ static class Ticketera
     public static Cliente BuscarCliente(int IdABuscar)
     {
         Cliente clienteBuscado;
-        if(DicClientes.ContainsKey(IdABuscar))
+        if (DicClientes.ContainsKey(IdABuscar))
         {
             clienteBuscado = DicClientes[IdABuscar];
         }
-        else 
+        else
         {
             clienteBuscado = null;
         }
@@ -35,12 +35,12 @@ static class Ticketera
         DicClientes[ID].TipoEntrada = Tipo;
         DicClientes[ID].Cantidad = CantidadEntradas;
         DicClientes[ID].FechaInscripcion = DateTime.Now;
-        return true; 
+        return true;
     }
 
     public static List<string> EstadisticasTicketera()
     {
-        int numerEntrada = 1;
+        
         List<string> estadisticas = new List<string>();
         int[] precios = { 45000, 60000, 30000, 100000 };
         int totalClientes = DicClientes.Count;
@@ -52,12 +52,14 @@ static class Ticketera
         IncioArray(recaudacionPorTipo);
         foreach (Cliente cliente in DicClientes.Values)
         {
-            if(numerEntrada == cliente.TipoEntrada)
+            for (int i = 0; i < DicClientes.Count; i++)
             {
-            cantTipoEntrada[cliente.TipoEntrada - 1] += cliente.Cantidad;
-            recaudacionPorTipo[cliente.TipoEntrada - 1] += cliente.Cantidad * precios[cliente.TipoEntrada-1];
+                if (i == cliente.TipoEntrada)
+                {
+                    cantTipoEntrada[cliente.TipoEntrada - 1] += cliente.Cantidad;
+                    recaudacionPorTipo[cliente.TipoEntrada - 1] += cliente.Cantidad * precios[cliente.TipoEntrada - 1];
+                }
             }
-            numerEntrada++;
         }
         for (int i = 0; i < cantTipoEntrada.Length; i++)
         {
@@ -69,7 +71,7 @@ static class Ticketera
         {
             recaudacionTotal += cliente.Cantidad * cliente.TipoEntrada;
         }
-        estadisticas.Add("Recaudación total: " + recaudacionTotal);
+        estadisticas.Add("Recaudación total: $" + recaudacionTotal);
 
         for (int i = 0; i < cantTipoEntrada.Length; i++)
         {
@@ -80,10 +82,10 @@ static class Ticketera
         return estadisticas;
     }
     static void IncioArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
     {
-        array[i] = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = 0;
+        }
     }
-}
 }
