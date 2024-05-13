@@ -40,6 +40,7 @@ static class Ticketera
 
     public static List<string> EstadisticasTicketera()
     {
+        int numerEntrada = 1;
         List<string> estadisticas = new List<string>();
         int[] precios = { 45000, 60000, 30000, 100000 };
         int totalClientes = DicClientes.Count;
@@ -48,10 +49,15 @@ static class Ticketera
         int[] cantTipoEntrada = new int[4];
         int[] recaudacionPorTipo = new int[4];
         IncioArray(cantTipoEntrada);
+        IncioArray(recaudacionPorTipo);
         foreach (Cliente cliente in DicClientes.Values)
         {
+            if(numerEntrada == cliente.TipoEntrada)
+            {
             cantTipoEntrada[cliente.TipoEntrada - 1] += cliente.Cantidad;
             recaudacionPorTipo[cliente.TipoEntrada - 1] += cliente.Cantidad * precios[cliente.TipoEntrada-1];
+            }
+            numerEntrada++;
         }
         for (int i = 0; i < cantTipoEntrada.Length; i++)
         {
@@ -73,11 +79,11 @@ static class Ticketera
 
         return estadisticas;
     }
-    static void IncioArray(int[] cantTipoEntrada)
+    static void IncioArray(int[] array)
 {
-    for (int i = 0; i < cantTipoEntrada.Length; i++)
+    for (int i = 0; i < array.Length; i++)
     {
-        cantTipoEntrada[i] = 0;
+        array[i] = 0;
     }
 }
 }

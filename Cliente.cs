@@ -20,6 +20,6 @@ class Cliente
 
     public override string ToString()
     {
-        return "DNI: " + DNI + ", Tipo de entrada: " + TipoEntrada + ", Cantidad: " + Cantidad + ", Nombre: " + Nombre + ", Apellido: " + Apellido + "Fecha de Inscripcion: " + FechaInscripcion;
+        return "DNI: " + DNI + ", Tipo de entrada: " + TipoEntrada + ", Cantidad: " + Cantidad + ", Nombre: " + Nombre + ", Apellido: " + Apellido + ", Fecha de Inscripcion: " + FechaInscripcion;
     }
 }

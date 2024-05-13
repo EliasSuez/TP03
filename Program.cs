@@ -6,12 +6,14 @@ string ingreso;
 Dictionary<Cliente, int> DIClientes = new Dictionary<Cliente, int>();
 Cliente cliente, clienteEncontrado;
 
-
+do{
 Menu();
 Console.WriteLine("Ingrese que opcion del menu quiere");
 opcion = int.Parse(Console.ReadLine());
+}while(opcion < 1 || opcion > 5);
 do
 {
+    Console.Clear();
     switch (opcion)
     {
         case 1:
@@ -19,13 +21,13 @@ do
             {
                 cliente = ObtenerCliente();
                 cantClientes++;
-                DIClientes.Add(ObtenerCliente(), Dinero(cliente.TipoEntrada, cliente.Cantidad));
+                DIClientes.Add(cliente, Dinero(cliente.TipoEntrada, cliente.Cantidad));
                 do
                 {
                     Console.WriteLine("¿Quiere continuar ingresando? Ingrese SI o NO");
                     ingreso = Console.ReadLine().ToUpper();
                 } while (ingreso != "SI" && ingreso != "NO");
-            } while (ingreso == "NO");
+            } while (ingreso != "NO");
             break;
 
         case 2:
@@ -52,7 +54,7 @@ do
             }
             else
             {
-                Console.WriteLine(cliente);
+                cliente.ToString();
             }
             break;
 
@@ -61,7 +63,7 @@ do
             {
                 do
                 {
-                    IdABuscar = IngresarNumero("Ingrese el id a buscar");
+                    IdABuscar = IngresarNumero("Ingrese el ID a buscar");
 
                 } while (IdABuscar < 0);
                 do
@@ -107,8 +109,6 @@ static int Dinero(int tipoEntrada, int cantidad)
 
     return dinerGastado;
 }
-
-
 static string IngresarTexto(string mensaje)
 {
     string ingreso;
@@ -126,7 +126,7 @@ static int IngresarNumero(string mensaje)
 }
 static Cliente ObtenerCliente()
 {
-    DateTime fechaInscripcion = new DateTime(0, 0, 0);
+    DateTime fechaInscripcion;
     string apellido, nombre;
     int dni, tipoEntrada, cantidad;
 
@@ -146,11 +146,11 @@ static Cliente ObtenerCliente()
     do
     {
         apellido = IngresarTexto("Ingrese el apellido");
-    } while (apellido != " ");
+    } while (apellido == "");
     do
     {
         nombre = IngresarTexto("Ingrese el nombre");
-    } while (apellido != " ");
+    } while (nombre == "");
     do
     {
         Console.WriteLine("Ingrese la fecha");
